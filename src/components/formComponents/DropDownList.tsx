@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import '../../App.css';
 import axios from "axios";
 
+interface Props {
+    foundationButton:Boolean;
+}
 
-const DropDownList: React.FC = () => {
+const DropDownList: React.FC<Props> = (props) => {
+
+    const {foundationButton} = props;
 
 const [shelter, setShelter] = useState([])
 
@@ -16,7 +21,7 @@ const handleShelter = () => {
 
     return <>
         <div className="dropDownList">
-            <p className="Text">O projekte</p>
+            <p className="Text"><span>O projekte</span> {foundationButton === true &&<span className="notRequiredText">Nepovinné</span> }</p>
             <select className="selectDropDown dropdownMenu" name="cars" id="cars" onClick={handleShelter}>
             <option className="Text">Útulok</option>
                 {shelter.map(({ id, name }) => (
