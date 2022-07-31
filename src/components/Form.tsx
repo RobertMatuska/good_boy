@@ -5,13 +5,13 @@ import MainButtons from "./formComponents/MainButtons";
 
 const Form: React.FC = () => {
 
-    return <>
-    <form>
-        <MainButtons /> 
-        <DropDownList />
-        <Amount />
-        <input className="submitButton" type="submit" value="Pokračovať" />
-    </form>
+    return <>    
+        <form>
+            <MainButtons /> 
+            <DropDownList />
+            <Amount />
+            <input className="submitButton" type="submit" value="Pokračovať" />
+        </form>
     </>
 }
 
