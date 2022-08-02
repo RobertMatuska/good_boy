@@ -1,5 +1,6 @@
 import { Button } from "@mantine/core";
 import React, { useState } from "react";
+import DefaultPage from "../DefaultPage";
 import Amount from "./formComponents/Amount";
 import DropDownList from "./formComponents/DropDownList";
 import MainButtons from "./formComponents/MainButtons";
@@ -9,14 +10,11 @@ import Summar from "./Summar";
 const Form: React.FC = () => {
 
     // const for typ contribution
-    const [shelterContributionButton,setShelterContributionButton] = useState(false)
-    const [foundationContributionButton,setFoundationContributionButton] = useState(false)
     const [first,setFirst] = useState(Boolean)   // first = vybraná podpora pre útulok
     const [second,setSecond] = useState(Boolean)  // second = vybraná podpora pre nadáciu
     const [mainButton, setMainButton] = useState(String)
 
     const handleChangeShelterButton = (data:any) => {
-
         if(data !== null) {
         setFirst(true)
         setSecond(false)
@@ -24,9 +22,10 @@ const Form: React.FC = () => {
         }
     }
   
-    const handleChangeFundationButton = () => {
+    const handleChangeFundationButton = (data:any) => {
         setFirst(false)
         setSecond(true)
+        setMainButton(data);
     }
 
     // const for selected shelter
@@ -66,13 +65,15 @@ const Form: React.FC = () => {
 
     const [page, setPage] = useState(0);
 
+console.log("main",mainButton)
+
 const conditionalComponent = () => {
     switch (page) {
       case 0:
         return <>
 
         <h1 className='title'>Vyberte si možnosť, ako chcete pomôcť</h1>
-        <MainButtons onChangeShelterButton={handleChangeShelterButton} onChangeFoundationButton={handleChangeFundationButton} shelterContributionButton={shelterContributionButton} foundationContributionButton={foundationContributionButton}/> 
+        <MainButtons onChangeShelterButton={handleChangeShelterButton} onChangeFoundationButton={handleChangeFundationButton} /> 
         <DropDownList foundationButton={second} onSelectedShelter={handleSelectedShelter}/>
         <Amount onAmountValue={handleAmountValue}/>
        </>
@@ -81,19 +82,49 @@ const conditionalComponent = () => {
         <h1 className='title'>Potrebujeme od Vás zopár informácii</h1>
         <PersonalForm name={name} surname={surname} email={email} phoneNumber={phoneNumber} onInputPhoneNumber={handleInputPhoneNumber} onInputEmail={handleInputEmail} onInputSurname={handleInputSurname} onInputName={handleInputName}/>
         </>
-        case 2:
+     case 2:
             return <>
             <h1 className='title'>Skontrolujte si zadané údaje</h1>
-            <Summar amount={amount} selectedShelter={selectedShelter} mainButton={mainButton} name={name} surname={surname} email={email} phoneNumber={phoneNumber}/>
+            <Summar amount={amount} selectedShelter={selectedShelter} mainButton={mainButton} name={name} surname={surname} email={email} phoneNumber={phoneNumber} />
             </>
+    default:
+        return (
+        <>
+       <DefaultPage />
+       </>)
     }
   }
 
+  console.log("first a second amount, selectedSheltrer", first, second,amount,selectedShelter)
+
     const handleSubmitNext = () => {
-        setPage(page + 1);
-        if(page ===1) {
-        }
+        
+        if (page === 0 ) {
+            if(first === false && second == false){
+            alert("Vyber typ podpory")
+            }
+             if( first === true ){
+                if(selectedShelter ==="") {
+                alert("Vyber útulok na podporu")
+              }
+              if(amount === "") {
+                alert("vyberte sumu podpory")}
+            }
+            if(amount !== "" && first === true && selectedShelter !==""){
+                 setPage(page + 1);
+            }
+            if( second === true ){
+              if(amount === "") {
+                alert("vyberte sumu podpory")}
+            }
+            if(amount !== "" && second === true){
+                 setPage(page + 1);
+            }       
     }
+    if (page === 1 ) {
+        setPage(page + 1);
+    }
+}
 
     const handleSubmitPrevius = () => {
         if(page > 0) {
