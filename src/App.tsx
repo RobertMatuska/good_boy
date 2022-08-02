@@ -17,7 +17,7 @@ function App() {
         <div className='mainPart'>
             <div className='row'>
                 <div className="column left">
-                      <h1 className='title'>Vyberte si možnosť ako chcete pomôcť</h1>
+                      
                       <Form />
                   </div>
                   <div className='column right' >
