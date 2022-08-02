@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
 interface Props {
     amount:string;
@@ -8,11 +8,20 @@ interface Props {
     surname:string,
     email: string,
     phoneNumber:string,
+    onCheckBox: (status:boolean) => void,
 }
 
 const Summar: React.FC<Props> = (props) => {
 
-    const {selectedShelter, amount, mainButton,phoneNumber, name, surname, email} = props;
+    const {selectedShelter, amount, mainButton,phoneNumber, name, surname, email, onCheckBox} = props;
+
+
+
+    const checkboxState = (e: ChangeEvent<HTMLInputElement>) => {
+        props.onCheckBox(e.target.checked)
+    }
+
+
 
     return <>
     <p>
@@ -30,7 +39,7 @@ const Summar: React.FC<Props> = (props) => {
     </p>
     <p>
         <div className="summarTitleText">Meno a priezvisko</div>
-        <div>{name + "" + surname}</div>
+        <div>{name + " " + surname}</div>
     </p>
     <p>
         <div className="summarTitleText">E-mailová adresa</div>
@@ -41,7 +50,7 @@ const Summar: React.FC<Props> = (props) => {
         <div>{phoneNumber}</div>
     </p>
     <div>
-    <input type="checkbox" className="checkbox" id="súhlas" name="suhlas" value="Súhlasim so spracovaním mojích osobných údajov" />
+    <input type="checkbox" className="checkbox" id="súhlas" name="suhlas"   onChange={checkboxState} value="Súhlasim so spracovaním mojích osobných údajov" />
     <span className="checkboxTextHeight">
     <label className="checkBoxText"> Súhlasim so spracovaním mojích osobných údajov</label>
     </span>

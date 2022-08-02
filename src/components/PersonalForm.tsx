@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
+import  slovakFlag  from "../assets/img/slovakia.png";
 
 interface Props {
     name:string,
@@ -13,13 +14,6 @@ interface Props {
 
 const PersonalForm: React.FC<Props> = (props) => {
 
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState('');
-
-    function isValidEmail(email: string) {
-        return /\S+@\S+\.\S+/.test(email);
-      }
-
     const {phoneNumber, name, surname, email, onInputEmail, onInputSurname, onInputName, onInputPhoneNumber} = props
 
     const handleInputName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,12 +23,6 @@ const PersonalForm: React.FC<Props> = (props) => {
         props.onInputSurname(e.target.value)
     }
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
-        if (!isValidEmail(e.target.value)) {
-            setError('Email is invalid');
-          } else {
-            setError("");
-          }
-          setMessage(e.target.value);
         props.onInputEmail(e.target.value)
     }
     const handleInputPhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,13 +32,18 @@ const PersonalForm: React.FC<Props> = (props) => {
     return <>
         <form >
             <label className="personalFormText">O vás</label>
-            <input className="inputPersonalFieldName" type="text" placeholder="Meno" value={name} onChange={handleInputName} min={6}></input>
-            <input className="inputPersonalFieldSurname" type="text" placeholder="Priezvisko" value={surname} onChange={handleInputSurname} ></input>
-            <div>
-            <input className="inputPersonalFieldEmail" type="text" placeholder="Email" value={email} onChange={handleInputEmail}></input>
-            {error && <h2 style={{color: 'red'}}>{error}</h2>}
+            <div className="inputPersonalFieldName">Meno <br />
+                <input className="inputPersonalFieldInput" type="text" placeholder="Zadajte Vaše meno" value={name} onChange={handleInputName}></input>
             </div>
-            <input className="inputPersonalFieldPhone" id="phone" name="phone" placeholder="Telefónne číslo" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value={phoneNumber} onChange={handleInputPhoneNumber} required></input>
+            <div className="inputPersonalFieldSurname">Priezvisko <br />
+                <input className="inputPersonalFieldInput" type="text" placeholder="Zadajte Vaše priezvisko" value={surname} onChange={handleInputSurname} ></input>
+            </div>
+            <div className="inputPersonalFieldEmail">E-mailová adresa <br />
+            <input className="inputPersonalFieldInput" type="text" placeholder="Zadajte Váš e-mail" value={email} onChange={handleInputEmail}></input>
+            </div>
+            <div className="inputPersonalFieldPhone">Telefónne číslo <br />  <img className="slovakFlag" src={slovakFlag} alt="Logo" />
+            <input className="inputPersonalFieldInput" id="phone" name="phone" placeholder="+421" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value={phoneNumber} onChange={handleInputPhoneNumber} required></input>
+            </div>
         </form>
     </>
 }

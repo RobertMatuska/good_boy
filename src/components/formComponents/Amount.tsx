@@ -36,11 +36,11 @@ const Amount: React.FC<Props> = (props) => {
                     <label className="e-btn singleAmountrButton singleAmountValue" htmlFor="fifty">50€</label>
                 </span>
                 <span >
-                    <input type="radio" id="hundred" name="value" value="custom" onChange={handleAmountClick}/>
+                    <input type="radio" id="hundred" name="value" value="100" onChange={handleAmountClick}/>
                     <label className="e-btn singleAmountrButton singleAmountValue" htmlFor="hundred">100€</label>
                 </span>
                 <span >
-                <input type="radio" id="custom" name="value" value="custom" onChange={handleAmountClick}/>
+                <input type="radio" id="custom"  name="value" value="custom" onChange={handleAmountClick}/>
                     <label className="e-btn singleAmountrButton singleAmountValue" htmlFor="custom">___ €</label>
                 </span>
             </div>

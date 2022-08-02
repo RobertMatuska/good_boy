@@ -65,7 +65,16 @@ const Form: React.FC = () => {
 
     const [page, setPage] = useState(0);
 
-console.log("main",mainButton)
+    // const for summary page
+
+    const [checkbox, setCheckbox] = useState(Boolean)
+  
+
+    const handleCheckbox = (status:boolean) => {
+        setCheckbox(status)
+    }
+
+    console.log("checkbox", checkbox)
 
 const conditionalComponent = () => {
     switch (page) {
@@ -85,7 +94,7 @@ const conditionalComponent = () => {
      case 2:
             return <>
             <h1 className='title'>Skontrolujte si zadané údaje</h1>
-            <Summar amount={amount} selectedShelter={selectedShelter} mainButton={mainButton} name={name} surname={surname} email={email} phoneNumber={phoneNumber} />
+            <Summar amount={amount} selectedShelter={selectedShelter} mainButton={mainButton} name={name} surname={surname} email={email} phoneNumber={phoneNumber} onCheckBox={handleCheckbox}/>
             </>
     default:
         return (
@@ -97,7 +106,9 @@ const conditionalComponent = () => {
 
   console.log("first a second amount, selectedSheltrer", first, second,amount,selectedShelter)
 
-    const handleSubmitNext = () => {
+  const [message, setMessage] = useState("");
+
+    const handleSubmitNext = async () => {
         
         if (page === 0 ) {
             if(first === false && second == false){
@@ -122,12 +133,58 @@ const conditionalComponent = () => {
             }       
     }
     if (page === 1 ) {
-        setPage(page + 1);
+        if(name === "") {
+            alert("Vyplň meno")
+        }
+        else if(surname === "") {
+            alert("Vyplň priezvisko")
+        }
+        else if(email === "") {
+            alert("Vyplň email")
+        }
+        else if(phoneNumber === "") {
+            alert("Vyplň telefónne číslo")
+        }
+        else {
+        setPage(page + 1);}
     }
+    if(page === 2) {
+        if (checkbox === false) {
+            alert("Nezadali ste súhlas")
+        }
+        else {
+            
+            try {
+              let res = await fetch("https://httpbin.org/post", {
+                method: "POST",
+                body: JSON.stringify({
+                  firstName: name,
+                  lastName: surname,
+                  email: email,
+                  phone: "0908215794",
+                  value: amount,
+                  shelterID: 1
+                }),
+              });
+              let resJson = await res.json();
+              if (res.status === 200) {
+                setName("");
+                setEmail("");
+                setMessage("Formulár odoslaný");
+                console.log(message)
+              } else {
+                setMessage("Nastala chyba");
+              }
+            } catch (err) {
+              console.log(err);
+            }
+    }
+} 
 }
 
     const handleSubmitPrevius = () => {
         if(page > 0) {
+            
         setPage(page-1);
         }
     }
