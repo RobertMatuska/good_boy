@@ -110,6 +110,15 @@ font-size: 16px;
 line-height: 19px;
 }
 
+.singleAmountButtonCustom {
+  align-items: center;
+  min-width: 48px;
+  height: 43px;
+  background: #FFFFFF;
+
+  border-radius: 8px;
+
+}
 .singleAmountrButton {
   align-items: center;
   padding: 16px;
@@ -119,6 +128,10 @@ line-height: 19px;
   border: 1px solid #DFDFDF;
   border-radius: 8px;
   margin:5px;
+}
+
+.customs {
+  width: 50px;
 }
 
 .customAmount {
@@ -481,6 +494,10 @@ line-height: 19px;
   display: inline-grid;
 }
 
+.validationMsg {
+  font-weight: "bold";
+  color: red ;
+}
 /* END  PERSONAL FORM */
 
 /* START SUMMAR */

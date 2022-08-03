@@ -10,9 +10,7 @@ interface Props {
 const DropDownList: React.FC<Props> = (props) => {
 
     const {foundationButton} = props;
-
     const [shelter, setShelter] = useState([])
-
 
     const handleShelter = () => {
         axios.get(`https://frontend-assignment-api.goodrequest.dev/api/v1/shelters`
@@ -20,6 +18,7 @@ const DropDownList: React.FC<Props> = (props) => {
             setShelter(response.data.shelters) 
         })
     }
+    console.log(shelter)
 
     const selectedShelterType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         props.onSelectedShelter(e.target.value)
@@ -29,7 +28,7 @@ const DropDownList: React.FC<Props> = (props) => {
     return <>
         <div className="dropDownList">
             <p className="Text"><span>O projekte</span> {foundationButton === true && <span className="notRequiredText">Nepovinné</span> }</p>
-            <select className="selectDropDown dropdownMenu" name="cars" id="cars" onChange={selectedShelterType} onClick={handleShelter}>
+            <select className="selectDropDown dropdownMenu" onChange={selectedShelterType} onClick={handleShelter}>
             <option className="Text">Útulok</option>
                 {shelter.map(({ id, name }) => (
                 <option key={id} >{name}</option>
