@@ -10,14 +10,13 @@ function App() {
 
 
     <div className="App">
-      <header className="App-header">
 
-      </header>
+
       <body>
+
         <div className='mainPart'>
             <div className='row'>
-                <div className="column left">
-                      
+                <div className="column left">   
                       <Form />
                   </div>
                   <div className='column right' >
@@ -25,13 +24,14 @@ function App() {
             </div>
           </div>
         </div>
-      </body>
-
-      <footer className='footerPart'>
+        <footer className='footerPart'>
          <Footer />
       </footer>
+      </body>
+
+
     </div>
-  );
+  )
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { useState } from "react";
 import '../../App.css';
 import axios from "axios";
 
@@ -11,19 +11,16 @@ const DropDownList: React.FC<Props> = (props) => {
 
     const {foundationButton} = props;
     const [shelter, setShelter] = useState([])
-
     const handleShelter = () => {
         axios.get(`https://frontend-assignment-api.goodrequest.dev/api/v1/shelters`
         ).then(response => {
             setShelter(response.data.shelters) 
         })
     }
-    console.log(shelter)
 
     const selectedShelterType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         props.onSelectedShelter(e.target.value)
     }
-
 
     return <>
         <div className="dropDownList">

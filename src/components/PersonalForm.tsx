@@ -17,10 +17,6 @@ const PersonalForm: React.FC<Props> = (props) => {
 
     const {phoneNumber, name, surname, email, onInputEmail, onInputSurname, onInputName, onInputPhoneNumber} = props
 
-    const handleInputName = (e: ChangeEvent<HTMLInputElement>) => {
-        props.onInputName(e.target.value)
-    }
-
     const [validationName, setvalidationName] = useState("");
     const validateName = (e: ChangeEvent<HTMLInputElement>) => {
         props.onInputName(e.target.value)
@@ -47,7 +43,6 @@ const PersonalForm: React.FC<Props> = (props) => {
     const validateEmail = (e: ChangeEvent<HTMLInputElement>) => {
         props.onInputEmail(e.target.value)
         var email = e.target.value;
-        console.log("email je",email)
         if (validator.isEmail(email)) {
             setValidationEmail("");
         } else {
@@ -78,13 +73,12 @@ const PersonalForm: React.FC<Props> = (props) => {
                 <span className="validationMsg">{validationSurname}</span>
             </div>
             <div className="inputPersonalFieldEmail">E-mailová adresa* <br />
-            <input className="inputPersonalFieldInput" type="text" placeholder="Zadajte Váš e-mail" value={email} onChange={validateEmail}></input> 
-            <span className="validationMsg">{validationEmail}</span>
-           
+                <input className="inputPersonalFieldInput" type="text" placeholder="Zadajte Váš e-mail" value={email} onChange={validateEmail}></input> 
+                <span className="validationMsg">{validationEmail}</span>
             </div>
             <div className="inputPersonalFieldPhone">Telefónne číslo* <br />  <img className="slovakFlag" src={slovakFlag} alt="Logo" />
-            <input className="inputPersonalFieldInput" id="phone" name="phone" placeholder="+421" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value={phoneNumber} onChange={validatePhone} required></input>
-            <span className="validationMsg">{validationPhoneNumber}</span>
+                <input className="inputPersonalFieldInput" id="phone" name="phone" placeholder="+421" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value={phoneNumber} onChange={validatePhone} required></input>
+                <span className="validationMsg">{validationPhoneNumber}</span>
             </div>
         </form>
     </>

@@ -5,7 +5,6 @@ import { ChangeEvent } from "react";
 interface Props {
     onChangeShelterButton: (data:String) => void;
     onChangeFoundationButton: (data:String) => void;
-
 }
 
 const MainButtons: React.FC<Props> = (props) => {
@@ -17,8 +16,6 @@ const MainButtons: React.FC<Props> = (props) => {
     const handleClickSecond= (e: ChangeEvent<HTMLInputElement>) => {
         props.onChangeFoundationButton(e.target.value);
     }
-
-
 
     return <>
      <div className="mainButtons">

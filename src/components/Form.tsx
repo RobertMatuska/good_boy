@@ -1,6 +1,5 @@
 import { Button } from "@mantine/core";
 import React, { useState } from "react";
-import DefaultPage from "../DefaultPage";
 import Amount from "./formComponents/Amount";
 import DropDownList from "./formComponents/DropDownList";
 import MainButtons from "./formComponents/MainButtons";
@@ -35,15 +34,10 @@ const Form: React.FC = () => {
     const [selectedShelter, setSelectedShelter] = useState("")  // selectedShelter = vybraný útulok
 
     const handleSelectedShelter = (shelter:string) => {
-        setSelectedShelter(shelter)
-        console.log("sheltiiik",shelter)
-        
+        setSelectedShelter(shelter)        
     }
 
-    console.log("shelter",selectedShelter);
-
     //const for amount
-
     const [amount, setAmount] = useState(String) // amount = vybraná suma podpory
 
     const handleAmountValue = (data:string) => {
@@ -51,7 +45,6 @@ const Form: React.FC = () => {
     }
 
     // const for PersonalForm
-
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
     const [email, setEmail] = useState("")
@@ -72,7 +65,6 @@ const Form: React.FC = () => {
     const [page, setPage] = useState(0);
 
     // const for summary page
-
     const [checkbox, setCheckbox] = useState(Boolean)
   
     const handleCheckbox = (status:boolean) => {
@@ -102,16 +94,11 @@ const conditionalComponent = () => {
             <Summar amount={amount} selectedShelter={selectedShelter} mainButton={mainButton} name={name} surname={surname} email={email} phoneNumber={phoneNumber} onCheckBox={handleCheckbox}/>
         </>
     default:
-        return (
-        <>
-            <DefaultPage />
-       </>)
+        return 
     }
   }
-  const [message, setMessage] = useState("");
 
     const handleSubmitNext = async () => {
-        
         if (page === 0) {
             if(first === false && second == false){
                 alert("Vyber typ podpory")
@@ -167,10 +154,8 @@ const conditionalComponent = () => {
                     console.log(res);
                     console.log(res.data);
                     alert("Formulár bol odoslaný, budete presmerovaný na domovskú stránku")
-                    window.location.href = "/" //Redirect on HomePage
-                    
-                })
-                    
+                    window.location.href = "/" //Redirect on HomePage           
+                })        
         }
     } 
 }
